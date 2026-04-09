@@ -61,23 +61,24 @@ export default function Gallery() {
                  </div>
               </div>
 
-              {/* Image Layer - REMOVED GRAYSCALE AND OPACITY FILTERS */}
+              {/* Image Layer */}
               <img
                 src={asset.src}
                 alt={asset.label}
                 className="h-full w-full object-cover group-hover:scale-105 transition-all duration-700 ease-out"
               />
 
-              {/* Hover Content */}
+              {/* Hover Content - "Inspect Asset" Removed */}
               <div className="absolute inset-0 z-20 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent p-8 flex flex-col justify-end">
                 <div className="translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                  <p className="text-[10px] font-black uppercase tracking-widest text-primary mb-2">
-                    {asset.label}
-                  </p>
-                  <div className="flex justify-between items-center">
-                    <h3 className="text-2xl font-display font-black uppercase tracking-tighter italic text-white">
-                      Inspect_Asset
-                    </h3>
+                  <div className="flex justify-between items-end">
+                    <div className="space-y-1">
+                      <p className="text-[10px] font-black uppercase tracking-widest text-primary">
+                        {asset.label}
+                      </p>
+                      {/* Sub-label or placeholder can go here if needed, currently empty to keep it clean */}
+                      <p className="text-[8px] font-bold text-white/40 uppercase tracking-[0.2em]">Deployment_Ready</p>
+                    </div>
                     <div className="p-3 rounded-full bg-white/10 backdrop-blur-md group-hover:bg-primary transition-colors">
                       <ArrowUpRight size={20} className="text-white group-hover:text-slate-950" />
                     </div>

@@ -1,4 +1,3 @@
-// src/components/ui/Card.tsx
 "use client";
 
 import React from "react";
@@ -20,42 +19,49 @@ export const SpecCard = ({ icon, title, value, description, detail, index }: Spe
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ delay: index * 0.05 }} // Faster stagger for mobile
-      className="group relative bg-white border border-slate-100 p-6 md:p-10 rounded-[1.5rem] md:rounded-[2.5rem] shadow-sm hover:shadow-2xl transition-all duration-500"
+      transition={{ delay: index * 0.05 }}
+      className="group relative bg-white border border-slate-100 p-5 md:p-10 rounded-[2rem] md:rounded-[2.5rem] shadow-sm hover:shadow-2xl transition-all duration-500 h-full flex flex-col justify-between"
     >
-      <div className="absolute top-0 right-0 p-4 md:p-6 opacity-0 group-hover:opacity-100 transition-opacity text-primary/30">
-        <ArrowUpRight size={24} className="md:w-8 md:h-8" />
+      {/* 1. Mobile-Friendly Arrow: Visible by default on mobile (low opacity) but high on hover */}
+      <div className="absolute top-5 right-5 md:top-6 md:right-6 opacity-30 md:opacity-0 group-hover:opacity-100 transition-opacity text-primary">
+        <ArrowUpRight size={20} className="md:w-8 md:h-8" />
       </div>
 
-      <div className="space-y-4 md:space-y-8">
-        {/* Smaller Icon for Mobile */}
-        <div className="w-12 h-12 md:w-16 md:h-16 rounded-xl md:rounded-2xl bg-slate-50 flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-all duration-500 shadow-inner">
+      <div className="space-y-6 md:space-y-8">
+        {/* 2. Icon Container: Balanced for smaller touch screens */}
+        <div className="w-12 h-12 md:w-16 md:h-16 rounded-[1.25rem] md:rounded-2xl bg-slate-50 flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-all duration-500 shadow-inner">
           {React.isValidElement(icon) && 
             React.cloneElement(icon as React.ReactElement<any>, { 
-              className: "group-hover:text-white transition-colors w-6 h-6 md:w-7 md:h-7",
+              className: "group-hover:text-white transition-colors w-5 h-5 md:w-7 md:h-7 text-slate-600",
             })
           }
         </div>
         
-        <div className="space-y-1 md:space-y-3">
+        <div className="space-y-2 md:space-y-3">
           <div className="flex items-center gap-2">
             <span className="h-px w-4 md:w-6 bg-primary/30" />
-            <p className="text-[9px] md:text-[10px] font-black uppercase tracking-[0.2em] text-primary">
+            <p className="text-[10px] md:text-[10px] font-black uppercase tracking-[0.2em] text-primary">
               {title}
             </p>
           </div>
-          <h3 className="text-xl md:text-4xl font-display font-black text-slate-900 tracking-tight">
+          {/* Responsive Header: Prevents long values from overflowing */}
+          <h3 className="text-2xl sm:text-3xl md:text-4xl font-display font-black text-slate-950 tracking-tight leading-tight">
             {value}
           </h3>
         </div>
 
-        <div className="space-y-3 md:space-y-4">
-          <p className="text-xs md:text-sm text-slate-500 leading-relaxed font-medium line-clamp-2 md:line-clamp-none">
+        <div className="space-y-4 md:space-y-6">
+          {/* 3. Description: Removed line-clamp-2 to ensure technical details aren't cut off on mobile */}
+          <p className="text-sm md:text-base text-slate-500 leading-relaxed font-medium">
             {description}
           </p>
-          <div className="pt-3 md:pt-4 border-t border-slate-50 flex items-center justify-between">
-            <span className="text-[8px] md:text-[9px] font-black uppercase text-slate-400 tracking-widest">{detail}</span>
-            <div className="w-1 h-1 md:w-1.5 md:h-1.5 rounded-full bg-slate-200 group-hover:bg-primary transition-colors" />
+          
+          {/* 4. Footer: Increased touch target/spacing */}
+          <div className="pt-4 border-t border-slate-100 flex items-center justify-between">
+            <span className="text-[9px] md:text-[10px] font-black uppercase text-slate-400 tracking-widest">
+              {detail}
+            </span>
+            <div className="w-1.5 h-1.5 rounded-full bg-slate-200 group-hover:bg-primary transition-colors animate-pulse" />
           </div>
         </div>
       </div>
