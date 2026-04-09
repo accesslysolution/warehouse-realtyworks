@@ -81,7 +81,8 @@ export default function Specs() {
   }, []);
 
   return (
-    <section id="specs" className="py-16 md:py-32 bg-[#F8FAFC] px-4 sm:px-6 relative overflow-hidden">
+    <section id="specs" className="py-16 md:py-32 bg-[#F8FAFC] relative overflow-hidden">
+      {/* Background Pattern */}
       <div 
         className="absolute inset-0 opacity-[0.03] pointer-events-none" 
         style={{ 
@@ -90,11 +91,12 @@ export default function Specs() {
         }} 
       />
 
-      <div className="max-w-7xl mx-auto relative z-10">
+      {/* Container: Changed px-4 to px-6 for better mobile gutters */}
+      <div className="max-w-7xl mx-auto px-6 md:px-10 relative z-10">
         
-        {/* Header Section */}
-        <div className="flex flex-row justify-between items-end gap-4 mb-10 md:mb-20">
-          <div className="space-y-3 md:space-y-6">
+        {/* Header Section: Adjusted for mobile stacking/alignment */}
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-10 md:mb-20">
+          <div className="space-y-4 md:space-y-6">
             <motion.div 
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -102,34 +104,39 @@ export default function Specs() {
               className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-slate-200 shadow-sm"
             >
               <HardHat size={12} className="text-primary" />
-              <span className="text-[8px] md:text-[10px] font-black uppercase tracking-[0.2em] text-slate-600">
+              <span className="text-[9px] md:text-[10px] font-black uppercase tracking-[0.2em] text-slate-600">
                 Grade-A Infrastructure
               </span>
             </motion.div>
+            
+            {/* Responsive Heading */}
             <h2 className="text-4xl md:text-8xl font-display font-black uppercase tracking-tighter text-slate-950 leading-[0.9]">
               Technical <br className="hidden md:block" /> 
               <span className="text-slate-300 italic">Core.</span>
             </h2>
           </div>
 
-          {/* Navigation Buttons - Now visible on all screens */}
-          <div className="flex items-center gap-2 md:gap-3 mb-1 md:mb-2">
-            <button className="swiper-prev-button w-10 h-10 md:w-14 md:h-14 rounded-full border border-slate-200 bg-white flex items-center justify-center text-slate-400 hover:bg-primary hover:text-white hover:border-primary transition-all duration-300 shadow-sm active:scale-90 disabled:opacity-20 disabled:pointer-events-none">
-              <ChevronLeft size={20} className="md:w-6 md:h-6" />
+          {/* Navigation Buttons: Scaled down slightly for mobile */}
+          <div className="flex items-center gap-3 self-end md:self-auto">
+            <button className="swiper-prev-button w-12 h-12 md:w-14 md:h-14 rounded-full border border-slate-200 bg-white flex items-center justify-center text-slate-400 hover:bg-primary hover:text-white hover:border-primary transition-all duration-300 shadow-sm active:scale-90 disabled:opacity-20 disabled:pointer-events-none">
+              <ChevronLeft size={20} />
             </button>
-            <button className="swiper-next-button w-10 h-10 md:w-14 md:h-14 rounded-full border border-slate-200 bg-white flex items-center justify-center text-slate-400 hover:bg-primary hover:text-white hover:border-primary transition-all duration-300 shadow-sm active:scale-90 disabled:opacity-20 disabled:pointer-events-none">
-              <ChevronRight size={20} className="md:w-6 md:h-6" />
+            <button className="swiper-next-button w-12 h-12 md:w-14 md:h-14 rounded-full border border-slate-200 bg-white flex items-center justify-center text-slate-400 hover:bg-primary hover:text-white hover:border-primary transition-all duration-300 shadow-sm active:scale-90 disabled:opacity-20 disabled:pointer-events-none">
+              <ChevronRight size={20} />
             </button>
           </div>
         </div>
 
-        {/* Sliding View */}
-        <div className="relative cursor-grab active:cursor-grabbing min-h-[400px]">
+        {/* Sliding View:
+            - Changed slidesPerView to 1.15 to show a 'hint' of the next card on mobile
+            - overflow-visible is key for the card shadows not to be clipped
+        */}
+        <div className="relative cursor-grab active:cursor-grabbing min-h-[420px]">
           {isMounted ? (
             <Swiper
               modules={[Autoplay, Pagination, Navigation]}
-              spaceBetween={16}
-              slidesPerView={1.1}
+              spaceBetween={20}
+              slidesPerView={1.15}
               autoplay={{ delay: 4000, disableOnInteraction: false }}
               pagination={{ clickable: true, dynamicBullets: true }}
               navigation={{
@@ -137,7 +144,7 @@ export default function Specs() {
                 nextEl: '.swiper-next-button',
               }}
               breakpoints={{
-                640: { slidesPerView: 1.5 },
+                640: { slidesPerView: 1.5, spaceBetween: 24 },
                 1024: { slidesPerView: 2, spaceBetween: 30 }
               }}
               className="pb-16 !overflow-visible"
@@ -157,7 +164,7 @@ export default function Specs() {
             </Swiper>
           ) : (
             <div className="w-full flex gap-4 overflow-hidden">
-                <div className="w-full md:w-1/2 h-80 bg-slate-100 rounded-[2rem] animate-pulse" />
+                <div className="w-[85%] md:w-1/2 h-80 bg-slate-100 rounded-[2rem] animate-pulse" />
             </div>
           )}
         </div>

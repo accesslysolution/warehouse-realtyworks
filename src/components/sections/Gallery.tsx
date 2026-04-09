@@ -2,7 +2,7 @@
 
 import React, { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { ShieldCheck, ArrowUpRight, Aperture, MousePointer2 } from "lucide-react";
+import { ArrowUpRight, Aperture, MousePointer2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const galleryAssets = [
@@ -21,7 +21,6 @@ export default function Gallery() {
     target: targetRef,
   });
 
-  // Moves the gallery horizontally as the user scrolls vertically
   const x = useTransform(scrollYProgress, [0, 1], ["10%", "-70%"]);
 
   return (
@@ -58,19 +57,19 @@ export default function Gallery() {
               {/* Overlay Metadata */}
               <div className="absolute top-6 left-6 z-30 opacity-0 group-hover:opacity-100 transition-opacity">
                  <div className="bg-primary/90 text-slate-950 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-tighter">
-                    REF_{i + 1}
+                   REF_{i + 1}
                  </div>
               </div>
 
-              {/* Image Layer */}
+              {/* Image Layer - REMOVED GRAYSCALE AND OPACITY FILTERS */}
               <img
                 src={asset.src}
                 alt={asset.label}
-                className="h-full w-full object-cover grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700 ease-out"
+                className="h-full w-full object-cover group-hover:scale-105 transition-all duration-700 ease-out"
               />
 
               {/* Hover Content */}
-              <div className="absolute inset-0 z-20 bg-gradient-to-t from-slate-950 via-transparent to-transparent p-8 flex flex-col justify-end">
+              <div className="absolute inset-0 z-20 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent p-8 flex flex-col justify-end">
                 <div className="translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
                   <p className="text-[10px] font-black uppercase tracking-widest text-primary mb-2">
                     {asset.label}
@@ -89,7 +88,7 @@ export default function Gallery() {
           ))}
         </motion.div>
 
-        {/* Dynamic Progress Bar (Bottom Line) */}
+        {/* Dynamic Progress Bar */}
         <div className="absolute bottom-0 left-0 w-full h-1 bg-white/5">
             <motion.div 
                 style={{ scaleX: scrollYProgress }} 
