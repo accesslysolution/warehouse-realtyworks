@@ -39,7 +39,6 @@ export default function ContactFormPopup({ onClose, propertyTitle }: ContactForm
     setStatus("loading");
 
     try {
-      // Simulation of lead submission
       await new Promise(resolve => setTimeout(resolve, 1500));
       setStatus("success");
       setTimeout(() => onClose(), 2500);
@@ -72,25 +71,37 @@ export default function ContactFormPopup({ onClose, propertyTitle }: ContactForm
         {/* Mobile Drag Handle */}
         <div className="w-12 h-1.5 bg-slate-100 rounded-full mx-auto mt-4 mb-2 sm:hidden" />
 
-        {/* Quick Call Header Bar */}
-        <div className="bg-slate-900 px-8 py-3 flex items-center justify-between">
+        {/* Quick Call Header Bar - Repositioned Close Button for Mobile */}
+        <div className="bg-slate-900 px-6 sm:px-8 py-3 flex items-center justify-between relative">
           <div className="flex items-center gap-2">
             <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
             <span className="text-[10px] font-black text-white uppercase tracking-widest">Expert Online</span>
           </div>
-          <a 
-            href="tel:+919765464333" 
-            className="flex items-center gap-2 text-[#fd610d] hover:text-white transition-colors group"
-          >
-            <PhoneCall size={14} className="group-hover:animate-bounce" />
-            <span className="text-[11px] font-black">+91 97654 64333</span>
-          </a>
+          
+          <div className="flex items-center gap-4">
+            <a 
+              href="tel:+919765464333" 
+              className="flex items-center gap-2 text-[#fd610d] hover:text-white transition-colors group"
+            >
+              <PhoneCall size={14} className="group-hover:animate-bounce" />
+              <span className="text-[11px] font-black tracking-tight">+91 97654 64333</span>
+            </a>
+
+            {/* Close button inside header for Mobile Only */}
+            <button 
+              onClick={onClose}
+              className="sm:hidden p-1 text-slate-400 hover:text-white transition-colors"
+            >
+              <X size={18} />
+            </button>
+          </div>
         </div>
 
+        {/* Desktop Close Button (hidden on mobile) */}
         <button
           type="button"
           onClick={onClose}
-          className="absolute top-12 right-5 p-2 rounded-full bg-slate-50 text-slate-400 hover:text-slate-900 hover:bg-slate-100 transition-all z-[120]"
+          className="hidden sm:flex absolute top-14 right-6 p-2 rounded-full bg-slate-50 text-slate-400 hover:text-slate-900 hover:bg-slate-100 transition-all z-[120]"
         >
           <X size={20} />
         </button>
@@ -128,7 +139,6 @@ export default function ContactFormPopup({ onClose, propertyTitle }: ContactForm
               </div>
 
               <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
-                {/* Honeypot field */}
                 <input type="text" name="website_url" className="hidden" tabIndex={-1} autoComplete="off" />
 
                 <div className="grid grid-cols-1 gap-4">
