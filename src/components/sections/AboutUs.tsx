@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import Image from 'next/image';
 import { 
   CheckCircle2, 
   ArrowRight, 
@@ -48,10 +49,10 @@ const AboutSection = () => {
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
         
         {/* --- WHO WE ARE --- */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16 items-center mb-20 md:mb-24">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16 items-start mb-20 md:mb-24">
           <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
           >
             <h2 className="text-[#fd610d] font-black uppercase tracking-[0.2em] text-[10px] md:text-xs mb-3">Who We Are</h2>
@@ -59,18 +60,43 @@ const AboutSection = () => {
               Find Your Space <br className="hidden md:block" /> 
               <span className="text-blue-600">Without Confusion.</span>
             </h3>
-            <div className="space-y-4 text-slate-600 font-medium text-base md:text-lg leading-relaxed">
+            <div className="space-y-4 text-slate-600 font-medium text-base md:text-lg leading-relaxed mb-10">
               <p>
                 Warehouseshed helps businesses find the right warehouse space without the headache. 
                 Since 2018, we’ve matched companies with properties that fit their 
                 location, size, and budget perfectly.
               </p>
-              <p className="hidden md:block">
-                No complicated process. Just clear guidance and the right options matched to your business goals.
-              </p>
             </div>
+
+            {/* --- REALTY WORKS MANAGEMENT BADGE (Borderless, Full Color) --- */}
+            <motion.div 
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="bg-slate-50 p-5 rounded-2xl flex items-center gap-5"
+            >
+              {/* Logo Container - Seamless, Full Color initially */}
+              <div className="w-16 h-16 bg-white rounded-xl flex items-center justify-center flex-shrink-0 relative overflow-hidden">
+                <Image 
+                  src="/realty.avif" 
+                  alt="Realty Works Management" 
+                  fill 
+                  className="object-contain p-2" // Removed 'grayscale hover:grayscale-0'
+                />
+              </div>
+
+              {/* Subtle vertical separator */}
+              <div className="h-10 w-[1px] bg-slate-200" />
+
+              {/* Text Context */}
+              <div className="flex-grow">
+                <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-1">Asset Management Partner</p>
+                <h5 className="text-lg font-black text-slate-950 uppercase tracking-tight">Exclusively Managed by</h5>
+              </div>
+            </motion.div>
           </motion.div>
 
+          {/* Trust Panel (Remains the same) */}
           <motion.div 
             initial={{ opacity: 0, scale: 0.98 }}
             whileInView={{ opacity: 1, scale: 1 }}
@@ -119,7 +145,7 @@ const AboutSection = () => {
           </div>
         </div>
 
-        {/* --- PROCESS SECTION - REVISED COLORS --- */}
+        {/* --- PROCESS SECTION --- */}
         <div className="bg-slate-50 border border-slate-200 rounded-[2rem] md:rounded-[3.5rem] p-8 md:p-16 text-center">
           <h2 className="text-slate-400 font-black uppercase tracking-[0.2em] text-[10px] md:text-xs mb-3">How It Works</h2>
           <h3 className="text-2xl md:text-5xl font-black text-slate-900 uppercase tracking-tighter mb-10 md:mb-14">Simple. Fast. <span className="text-blue-600">Hassle-free.</span></h3>

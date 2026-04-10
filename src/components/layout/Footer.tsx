@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Phone, Mail, MapPin, ArrowUpRight } from 'lucide-react';
+import { Phone, MapPin, ShieldCheck } from 'lucide-react';
 // Using React-Icons for Brand Logos
 import { FaInstagram, FaFacebookF, FaLinkedinIn, FaWhatsapp } from "react-icons/fa6";
 
@@ -64,7 +64,7 @@ const Footer = () => {
                 { Icon: FaInstagram, href: "#" },
                 { Icon: FaFacebookF, href: "#" },
                 { Icon: FaLinkedinIn, href: "#" },
-                { Icon: FaWhatsapp, href: "https://wa.me/918208108473" }
+                { Icon: FaWhatsapp, href: "https://wa.me/919765464333" }
               ].map((item, i) => (
                 <a 
                   key={i} 
@@ -99,48 +99,56 @@ const Footer = () => {
           </div>
 
           {/* Contact Information */}
-          <div>
-            <h4 className="text-xs font-black uppercase tracking-[0.3em] mb-8 text-slate-500">Contact Detail</h4>
-            <ul className="space-y-6">
-              <li>
-                <a href="tel:+918208108473" className="group flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center group-hover:bg-blue-600 transition-all duration-500">
-                    <Phone size={18} className="text-blue-500 group-hover:text-white" />
+          <div className="space-y-8">
+            <div>
+              <h4 className="text-xs font-black uppercase tracking-[0.3em] mb-8 text-slate-500">Contact Detail</h4>
+              <ul className="space-y-6">
+                <li>
+                  <a href="tel:+919765464333" className="group flex items-start gap-4">
+                    <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center group-hover:bg-blue-600 transition-all duration-500">
+                      <Phone size={18} className="text-blue-500 group-hover:text-white" />
+                    </div>
+                    <div>
+                      <p className="text-[10px] font-black uppercase tracking-widest text-slate-600 mb-0.5">Direct Line</p>
+                      <p className="font-bold text-slate-200 group-hover:text-blue-500 transition-colors">+91 97654 64333</p>
+                    </div>
+                  </a>
+                </li>
+                <li>
+                  <div className="flex items-start gap-4">
+                    <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center">
+                      <MapPin size={18} className="text-blue-500" />
+                    </div>
+                    <div>
+                      <p className="text-[10px] font-black uppercase tracking-widest text-slate-600 mb-0.5">Operations</p>
+                      <p className="font-bold text-slate-200">Pune & Indore Industrial Zones</p>
+                    </div>
                   </div>
-                  <div>
-                    <p className="text-[10px] font-black uppercase tracking-widest text-slate-600 mb-0.5">Direct Line</p>
-                    <p className="font-bold text-slate-200 group-hover:text-blue-500 transition-colors">+91 82081 08473</p>
-                  </div>
-                </a>
-              </li>
-              <li>
-                <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center">
-                    <MapPin size={18} className="text-blue-500" />
-                  </div>
-                  <div>
-                    <p className="text-[10px] font-black uppercase tracking-widest text-slate-600 mb-0.5">Operations</p>
-                    <p className="font-bold text-slate-200">Pune & Indore Industrial Zones</p>
-                  </div>
-                </div>
-              </li>
-            </ul>
+                </li>
+              </ul>
+            </div>
           </div>
 
-          {/* CTA Column */}
-          <div className="bg-gradient-to-br from-white/10 to-transparent p-8 rounded-[2rem] border border-white/10 relative overflow-hidden group">
-            <div className="relative z-10">
-              <h4 className="text-xl font-black uppercase mb-4 leading-tight">Ready for a <br/> Site Visit?</h4>
-              <Link 
-                href="/#contact"
-                className="inline-flex items-center gap-2 text-[#fd610d] font-black uppercase tracking-widest text-[10px] group-hover:gap-4 transition-all"
-              >
-                Book Inspection <ArrowUpRight size={14} />
-              </Link>
+          {/* Realty Works Management Section - Minimalist 1:1 Aspect */}
+          <div className="flex flex-col items-center justify-center lg:items-start lg:pl-8">
+            <div className="flex items-center gap-2 mb-4">
+               <ShieldCheck size={12} className="text-emerald-500" />
+               <span className="text-[9px] font-black uppercase tracking-[0.25em] text-slate-500">Managed By</span>
             </div>
-            <div className="absolute -bottom-4 -right-4 text-white/5 transition-transform group-hover:scale-110 group-hover:rotate-12 duration-700">
-               <FaWhatsapp size={100} />
+
+            {/* 1:1 Aspect Ratio Container - No Bg, No Border */}
+            <div className="relative w-32 h-32 aspect-square">
+              <Image 
+                src="/realty.avif" 
+                alt="Realty Works" 
+                fill 
+                className="object-contain" 
+              />
             </div>
+            
+            <p className="mt-4 text-[10px] font-bold text-slate-400 tracking-tight leading-tight text-center lg:text-left">
+              Operational Excellence <br /> via Realty Works
+            </p>
           </div>
         </div>
 

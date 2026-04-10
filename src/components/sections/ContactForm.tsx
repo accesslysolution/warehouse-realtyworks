@@ -13,8 +13,8 @@ import {
   X, 
   MapPin, 
   ChevronDown,
-  Warehouse,
-  AlertCircle
+  AlertCircle,
+  PhoneCall
 } from "lucide-react";
 
 const warehouseLocations = [
@@ -34,16 +34,13 @@ export default function ContactFormPopup({ onClose, propertyTitle }: ContactForm
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
-    
-    // 1. Honeypot check (Antispam)
     if (formData.get("website_url")) return; 
 
     setStatus("loading");
 
     try {
-      // Logic for lead submission (e.g., API call or Formspree) goes here
+      // Simulation of lead submission
       await new Promise(resolve => setTimeout(resolve, 1500));
-      
       setStatus("success");
       setTimeout(() => onClose(), 2500);
     } catch (err) {
@@ -72,12 +69,28 @@ export default function ContactFormPopup({ onClose, propertyTitle }: ContactForm
         onClick={(e) => e.stopPropagation()}
         className="bg-white w-full max-w-[500px] rounded-t-[2.5rem] sm:rounded-[2rem] shadow-2xl relative overflow-hidden z-10 max-h-[95vh] flex flex-col"
       >
+        {/* Mobile Drag Handle */}
         <div className="w-12 h-1.5 bg-slate-100 rounded-full mx-auto mt-4 mb-2 sm:hidden" />
+
+        {/* Quick Call Header Bar */}
+        <div className="bg-slate-900 px-8 py-3 flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+            <span className="text-[10px] font-black text-white uppercase tracking-widest">Expert Online</span>
+          </div>
+          <a 
+            href="tel:+919765464333" 
+            className="flex items-center gap-2 text-[#fd610d] hover:text-white transition-colors group"
+          >
+            <PhoneCall size={14} className="group-hover:animate-bounce" />
+            <span className="text-[11px] font-black">+91 97654 64333</span>
+          </a>
+        </div>
 
         <button
           type="button"
           onClick={onClose}
-          className="absolute top-5 right-5 p-2 rounded-full bg-slate-50 text-slate-400 hover:text-slate-900 hover:bg-slate-100 transition-all z-[120]"
+          className="absolute top-12 right-5 p-2 rounded-full bg-slate-50 text-slate-400 hover:text-slate-900 hover:bg-slate-100 transition-all z-[120]"
         >
           <X size={20} />
         </button>
@@ -100,10 +113,6 @@ export default function ContactFormPopup({ onClose, propertyTitle }: ContactForm
           ) : (
             <>
               <div className="mb-8">
-                <div className="flex items-center gap-2 text-[#fd610d] mb-2">
-                   <Warehouse size={16} />
-                   <span className="text-[10px] font-black uppercase tracking-[0.2em]">High Priority Lead</span>
-                </div>
                 <h2 className="text-3xl font-black uppercase tracking-tighter text-slate-900 leading-none">
                   Get <span className="text-[#fd610d]">Pricing</span>
                 </h2>
@@ -119,7 +128,7 @@ export default function ContactFormPopup({ onClose, propertyTitle }: ContactForm
               </div>
 
               <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
-                {/* Honeypot field (hidden from humans) */}
+                {/* Honeypot field */}
                 <input type="text" name="website_url" className="hidden" tabIndex={-1} autoComplete="off" />
 
                 <div className="grid grid-cols-1 gap-4">
@@ -168,8 +177,7 @@ export default function ContactFormPopup({ onClose, propertyTitle }: ContactForm
                       name="message"
                       rows={3}
                       required
-                      defaultValue={propertyTitle ? `I'm interested in ${propertyTitle}. Please provide the latest quotation and availability.` : "I am looking for warehouse space in Pune. Please share available options and pricing."}
-                      placeholder="Additional Requirements (e.g. Area, Height)"
+                      defaultValue={propertyTitle ? `I'm interested in ${propertyTitle}. Please provide the latest quotation.` : "I am looking for warehouse space in Pune."}
                       className="w-full bg-slate-50 border-2 border-transparent rounded-2xl py-4 pl-12 pr-4 text-sm font-bold text-slate-900 focus:border-[#fd610d]/20 focus:bg-white transition-all outline-none resize-none"
                     />
                   </div>
@@ -196,7 +204,7 @@ export default function ContactFormPopup({ onClose, propertyTitle }: ContactForm
                   )}
                 </button>
                 <p className="text-[10px] text-center text-slate-400 font-bold uppercase tracking-tight px-4">
-                  By clicking, you agree to receive a technical quotation for logistics properties in Pune.
+                  Direct Line: +91 97654 64333 • Realty Works Pune
                 </p>
               </form>
             </>

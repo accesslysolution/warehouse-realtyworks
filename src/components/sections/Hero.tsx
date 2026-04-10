@@ -80,7 +80,7 @@ const HeroSection: React.FC = () => {
               variants={itemVariants}
               className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white tracking-tight leading-tight md:leading-tight"
             >
-              Warehouses That Fit Your Business <span className="text-blue-400">Perfectly</span>
+              Warehouses That Fits Your Business <span className="text-blue-400">Perfectly</span>
             </motion.h1>
 
             <motion.p
