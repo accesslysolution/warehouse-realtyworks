@@ -135,7 +135,7 @@ const PriceSheetPopup = ({ isOpen, onClose }: PriceSheetProps) => {
                 
                 <div className="flex items-center gap-3 w-full md:w-auto">
                   <a
-                    href="/assets/priceSheet.pdf"
+                    href="/assets/PriceSheet.pdf"
                     download
                     className="flex-1 md:flex-none inline-flex items-center justify-center gap-2 px-6 py-3 bg-slate-100 text-slate-900 rounded-xl font-black uppercase tracking-widest text-[10px] hover:bg-slate-200 transition-all active:scale-95"
                   >
