@@ -1,130 +1,162 @@
-"use client";
+'use client';
 
-import React from "react";
-import { motion } from "framer-motion";
-import { cn } from "@/lib/utils";
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { 
-  Building2, 
-  Target, 
-  Handshake, 
-  ShieldCheck 
-} from "lucide-react";
+  CheckCircle2, 
+  ArrowRight, 
+  Warehouse, 
+  Map, 
+  Construction, 
+  ClipboardCheck, 
+  Search, 
+  Truck, 
+  FileText 
+} from 'lucide-react';
+import ContactFormPopup from '@/components/sections/ContactForm';
 
-const values = [
-  {
-    icon: <Target size={18} />,
-    title: "Strategic Selection",
-    desc: "Every asset in our portfolio is vetted for multi-modal connectivity and long-term capital appreciation."
-  },
-  {
-    icon: <Handshake size={18} />,
-    title: "End-to-End Leasing",
-    desc: "From regulatory compliance to tenant management, we handle the full lifecycle of industrial rental."
-  }
-];
+const AboutSection = () => {
+  const [isFormOpen, setIsFormOpen] = useState(false);
 
-export default function AboutUs() {
+  const services = [
+    {
+      title: "Warehouse Rentals",
+      desc: "Ready-to-use spaces so you can start operations quickly.",
+      icon: <Warehouse className="text-blue-600" size={22} />
+    },
+    {
+      title: "Land for Development",
+      desc: "Find the right land if you want to build your own facility.",
+      icon: <Map className="text-blue-600" size={22} />
+    },
+    {
+      title: "Built-to-Suit",
+      desc: "We help you design and develop a warehouse based on your needs.",
+      icon: <Construction className="text-blue-600" size={22} />
+    }
+  ];
+
+  const steps = [
+    { title: "Tell us your requirement", icon: <ClipboardCheck size={20} /> },
+    { title: "We shortlist options", icon: <Search size={20} /> },
+    { title: "Site visits & comparison", icon: <Truck size={20} /> },
+    { title: "Final deal & paperwork", icon: <FileText size={20} /> }
+  ];
+
   return (
     <section id="about" className="py-16 md:py-24 bg-white overflow-hidden">
-      {/* Main Container: 
-          - Added px-6 for mobile safety (keeps text off the edges)
-          - Added md:px-10 for tablet/desktop breathing room
-      */}
-      <div className="max-w-7xl mx-auto px-6 md:px-10">
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
         
-        {/* Top Label */}
-        <motion.div 
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          className="flex items-center gap-3 mb-8 md:mb-12"
-        >
-          <div className="h-px w-12 bg-primary" />
-          <span className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-400">
-            The Realty Works Edge
-          </span>
-        </motion.div>
+        {/* --- WHO WE ARE --- */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16 items-center mb-20 md:mb-24">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-[#fd610d] font-black uppercase tracking-[0.2em] text-[10px] md:text-xs mb-3">Who We Are</h2>
+            <h3 className="text-3xl md:text-5xl font-black text-slate-900 uppercase tracking-tighter leading-[1] mb-6">
+              Find Your Space <br className="hidden md:block" /> 
+              <span className="text-blue-600">Without Confusion.</span>
+            </h3>
+            <div className="space-y-4 text-slate-600 font-medium text-base md:text-lg leading-relaxed">
+              <p>
+                Warehouseshed helps businesses find the right warehouse space without the headache. 
+                Since 2018, we’ve matched companies with properties that fit their 
+                location, size, and budget perfectly.
+              </p>
+              <p className="hidden md:block">
+                No complicated process. Just clear guidance and the right options matched to your business goals.
+              </p>
+            </div>
+          </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24">
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.98 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            className="bg-slate-950 rounded-[2rem] md:rounded-[2.5rem] p-8 md:p-12 text-white relative overflow-hidden shadow-2xl"
+          >
+            <div className="relative z-10">
+              <h4 className="text-xl md:text-2xl font-black uppercase mb-6 tracking-tight">Why Businesses Trust Us</h4>
+              <ul className="space-y-4 md:space-y-6">
+                {[
+                  "We understand your exact requirement",
+                  "We save your time with filtered options",
+                  "We keep everything transparent",
+                  "We support you from start to finish"
+                ].map((item, idx) => (
+                  <li key={idx} className="flex items-start gap-3">
+                    <CheckCircle2 className="text-emerald-400 mt-1 flex-shrink-0" size={18} />
+                    <span className="font-bold text-gray-200 text-sm md:text-base">{item}</span>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-8 pt-6 border-t border-white/10 text-[10px] font-black uppercase tracking-[0.2em] text-[#fd610d]">
+                No false promises. Just the right property.
+              </p>
+            </div>
+            <Warehouse className="absolute -bottom-10 -right-10 text-white/5" size={240} />
+          </motion.div>
+        </div>
+
+        {/* --- WHAT WE DO --- */}
+        <div className="mb-20 md:mb-28">
+          <div className="mb-10 md:mb-12">
+            <h2 className="text-[#fd610d] font-black uppercase tracking-[0.2em] text-[10px] md:text-xs mb-2">Our Solutions</h2>
+            <h3 className="text-2xl md:text-4xl font-black text-slate-900 uppercase tracking-tighter">Core Services</h3>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+            {services.map((service, idx) => (
+              <div key={idx} className="bg-slate-50 border border-slate-100 p-6 md:p-8 rounded-2xl md:rounded-3xl hover:border-blue-200 transition-all group">
+                <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center mb-5 shadow-sm">
+                  {service.icon}
+                </div>
+                <h4 className="text-lg md:text-xl font-black text-slate-900 uppercase tracking-tight mb-2">{service.title}</h4>
+                <p className="text-slate-500 font-medium text-sm md:text-base leading-relaxed">{service.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* --- PROCESS SECTION - REVISED COLORS --- */}
+        <div className="bg-slate-50 border border-slate-200 rounded-[2rem] md:rounded-[3.5rem] p-8 md:p-16 text-center">
+          <h2 className="text-slate-400 font-black uppercase tracking-[0.2em] text-[10px] md:text-xs mb-3">How It Works</h2>
+          <h3 className="text-2xl md:text-5xl font-black text-slate-900 uppercase tracking-tighter mb-10 md:mb-14">Simple. Fast. <span className="text-blue-600">Hassle-free.</span></h3>
           
-          {/* Left Side: Bold Branding */}
-          <div className="lg:col-span-6 space-y-8 md:space-y-10">
-            {/* Headline:
-                - Reduced from text-5xl to text-4xl on mobile to prevent overflow
-                - Balanced line height for mobile 
-            */}
-            <h2 className="text-4xl sm:text-5xl md:text-8xl font-display font-black uppercase tracking-tight text-slate-950 leading-[0.9] md:leading-[0.85]">
-              Real Estate <br />
-              <span className="text-slate-300">Re-Engineered.</span>
-            </h2>
-
-            {/* Image Wrapper: Reduced rounded corners slightly for mobile aesthetic */}
-            <div className="relative rounded-[2rem] md:rounded-[3rem] overflow-hidden aspect-[16/10] group">
-              <img 
-                src="/assets/hero-logistics.avif" 
-                alt="Modern Warehouse Infrastructure"
-                className="w-full h-full object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 to-transparent" />
-              <div className="absolute bottom-6 left-6 md:bottom-8 md:left-8 flex items-center gap-4">
-                <div className="p-3 md:p-4 bg-primary rounded-xl md:rounded-2xl">
-                  <ShieldCheck className="text-white" size={20} />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {steps.map((step, idx) => (
+              <div key={idx} className="bg-blue-600 p-6 rounded-2xl flex flex-col items-center gap-4 shadow-lg shadow-blue-900/10">
+                <div className="w-9 h-9 bg-white/20 backdrop-blur-md text-white rounded-full flex items-center justify-center font-black text-sm border border-white/30">
+                  0{idx + 1}
                 </div>
-                <div>
-                  <p className="text-white font-display font-black text-lg md:text-xl uppercase italic leading-none">Established</p>
-                  <p className="text-slate-400 text-[9px] md:text-[10px] font-bold uppercase tracking-widest mt-1">Pune Market Leaders</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Right Side: Content & Values */}
-          <div className="lg:col-span-6 flex flex-col justify-center space-y-10 md:space-y-12">
-            <div className="space-y-6">
-              {/* Adjusted text size for mobile */}
-              <h3 className="text-xl md:text-2xl font-display font-black uppercase text-slate-900 tracking-tight leading-snug">
-                Architecting the Future of <br className="hidden md:block" /> Pune’s Industrial Landscape.
-              </h3>
-              <div className="space-y-4 text-slate-500 text-sm md:text-base font-medium leading-relaxed">
-                <p>
-                  At <span className="text-slate-950 font-bold">Realty Works</span>, we operate at the intersection of logistical demand and architectural excellence. What started as a focused property consultancy has evolved into a powerhouse for industrial and commercial real estate across the Pune region.
-                </p>
-                <p>
-                  Our domain expertise spans from high-velocity warehouse leasing in Chakan and Talegaon to strategic commercial investments. We don't just find spaces; we provide the operational foundation for businesses to scale.
+                <p className="font-bold text-white text-sm md:text-base uppercase tracking-tighter leading-tight">
+                  {step.title}
                 </p>
               </div>
-            </div>
-
-            {/* Micro Values Grid: Added gap-y-10 for better stacking on mobile */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-10 pt-8 border-t border-slate-100">
-              {values.map((v, i) => (
-                <div key={i} className="space-y-3">
-                  <div className="flex items-center gap-3 text-primary">
-                    {v.icon}
-                    <h4 className="text-[11px] font-black uppercase tracking-widest">{v.title}</h4>
-                  </div>
-                  <p className="text-xs text-slate-400 font-semibold leading-relaxed">
-                    {v.desc}
-                  </p>
-                </div>
-              ))}
-            </div>
-
-            {/* Signature / CTA */}
-            <div className="pt-4">
-              <div className="flex items-center gap-4 group cursor-pointer">
-                <div className="w-12 h-12 md:w-14 md:h-14 rounded-full border border-slate-200 flex items-center justify-center group-hover:bg-slate-950 group-hover:border-slate-950 transition-all duration-500">
-                  <Building2 size={18} className="text-slate-900 group-hover:text-white transition-colors" />
-                </div>
-                <div>
-                  <p className="text-[9px] md:text-[10px] font-black uppercase tracking-widest text-slate-400">Connect with</p>
-                  <p className="text-xs md:text-sm font-black uppercase text-slate-950 tracking-tighter">Our Principal Consultants</p>
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
 
+          <button 
+            onClick={() => setIsFormOpen(true)}
+            className="mt-10 md:mt-14 inline-flex items-center gap-3 px-8 md:px-10 py-4 md:py-5 bg-[#fd610d] text-white rounded-xl md:rounded-2xl font-black uppercase tracking-widest text-[10px] md:text-xs hover:bg-[#e5560b] transition-all shadow-xl active:scale-95 group"
+          >
+            Start Your Search
+            <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+          </button>
         </div>
       </div>
+
+      <AnimatePresence>
+        {isFormOpen && (
+          <ContactFormPopup 
+            onClose={() => setIsFormOpen(false)} 
+            propertyTitle="Inquiry from About Section" 
+          />
+        )}
+      </AnimatePresence>
     </section>
   );
-}
+};
+
+export default AboutSection;

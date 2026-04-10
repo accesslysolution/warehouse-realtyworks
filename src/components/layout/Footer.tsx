@@ -1,150 +1,167 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import { Warehouse, ArrowUpRight, Phone, Mail, MapPin } from "lucide-react";
+import React from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
+import { Phone, Mail, MapPin, ArrowUpRight } from 'lucide-react';
+// Using React-Icons for Brand Logos
+import { FaInstagram, FaFacebookF, FaLinkedinIn, FaWhatsapp } from "react-icons/fa6";
 
-const footerLinks = {
-  // Synchronized with your Navbar navLinks
-  navigation: [
-    { name: "Home", href: "#" },
-    { name: "Inventory", href: "#inventory" },
-    { name: "About Us", href: "#about" },
-    { name: "Gallery", href: "#gallery" },
-    { name: "Technical Specs", href: "#specs" },
-  ],
-  support: [
-    { name: "Privacy Policy", href: "/privacy" },
-    { name: "Terms of Service", href: "/terms" },
-  ],
-};
+const navLinks = [
+  { name: 'Home', href: '/#hero' },
+  { name: 'Inventory', href: '/#inventory' },
+  { name: 'About', href: '/#about' },
+  { name: 'Gallery', href: '/#gallery' },
+  { name: 'Technical Specs', href: '/#specs' },
+];
 
-export default function Footer() {
-  const [currentYear, setCurrentYear] = useState<number | string>("");
+const Footer = () => {
+  const currentYear = new Date().getFullYear();
 
-  useEffect(() => {
-    setCurrentYear(new Date().getFullYear());
-  }, []);
+  const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (href.startsWith('/#')) {
+      e.preventDefault();
+      const id = href.replace('/#', '');
+      const element = document.getElementById(id);
+      if (element) {
+        window.scrollTo({
+          top: element.offsetTop - 80,
+          behavior: 'smooth',
+        });
+      }
+    }
+  };
 
   return (
-    <footer className="relative bg-slate-950 text-white overflow-hidden border-t-4 border-primary pt-24 pb-8">
-      {/* Background Decorative Elements */}
-      <div className="absolute inset-0 bg-grid-white/[0.02] -z-10" />
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 blur-[120px] rounded-full -z-10 pointer-events-none" />
+    <footer className="bg-slate-950 text-white pt-20 pb-10 overflow-hidden relative border-t border-white/5">
+      {/* Structural Accent - Blueprint Grid */}
+      <div 
+        className="absolute inset-0 opacity-[0.02] pointer-events-none" 
+        style={{ 
+          backgroundImage: `linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)`, 
+          backgroundSize: '40px 40px' 
+        }} 
+      />
       
-      {/* Huge Background Text - Industrial Style */}
-      <div className="absolute -bottom-10 -left-10 text-[15rem] font-black text-white/[0.02] select-none pointer-events-none tracking-tighter uppercase italic leading-none">
-        PUNE
-      </div>
-
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-20">
+      <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 mb-20">
           
           {/* Brand Column */}
-          <div className="flex flex-col gap-6 lg:col-span-1">
-            <div className="flex flex-col gap-4">
-              <div className="flex items-center gap-3 group cursor-default">
-                <div className="bg-primary p-2 rounded-xl transition-transform group-hover:rotate-6">
-                  <Warehouse className="text-white" size={24} />
-                </div>
-                <span className="font-display font-black text-2xl tracking-tighter uppercase transition-colors duration-500">
-                  Realty<span className="italic text-white/60">Works</span>
-                </span>
+          <div className="space-y-8">
+            <Link href="/" className="flex items-center gap-3 active:scale-95 transition-transform">
+              <div className="relative w-10 h-10">
+                <Image src="/logo.avif" alt="Logo" fill className="object-contain" />
               </div>
-              <p className="text-slate-400 text-sm leading-relaxed font-medium max-w-xs">
-                Setting the standard for Grade-A industrial infrastructure in Maharashtra. 
-                Innovative space solutions for the modern supply chain.
-              </p>
+              <span className="font-black text-2xl uppercase tracking-tighter">
+                <span className="text-[#fd610d]">Warehouse</span> <span className="text-blue-500">Sheds</span>
+              </span>
+            </Link>
+            <p className="text-slate-400 font-medium leading-relaxed max-w-xs">
+              Specializing in Grade-A industrial infrastructure and warehouse logistics solutions across Pune and Indore since 2018.
+            </p>
+            <div className="flex items-center gap-3">
+              {[
+                { Icon: FaInstagram, href: "#" },
+                { Icon: FaFacebookF, href: "#" },
+                { Icon: FaLinkedinIn, href: "#" },
+                { Icon: FaWhatsapp, href: "https://wa.me/918208108473" }
+              ].map((item, i) => (
+                <a 
+                  key={i} 
+                  href={item.href} 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 rounded-xl border border-white/10 flex items-center justify-center text-slate-400 hover:bg-[#fd610d] hover:border-[#fd610d] hover:text-white transition-all duration-300 active:scale-90"
+                >
+                  <item.Icon size={18} />
+                </a>
+              ))}
             </div>
           </div>
 
-          {/* Directory Column - Updated to match NavLinks */}
+          {/* Quick Links */}
           <div>
-            <h4 className="font-display font-black uppercase text-[11px] tracking-[0.2em] mb-8 text-primary">Directory</h4>
-            <ul className="flex flex-col gap-4">
-              {footerLinks.navigation.map((link) => (
+            <h4 className="text-xs font-black uppercase tracking-[0.3em] mb-8 text-slate-500">Navigation</h4>
+            <ul className="space-y-4">
+              {navLinks.map((link) => (
                 <li key={link.name}>
-                  <a href={link.href} className="text-xs font-bold uppercase tracking-widest text-slate-400 hover:text-white flex items-center gap-2 group transition-colors">
-                    <span className="h-px w-0 bg-primary group-hover:w-4 transition-all" />
+                  <Link 
+                    href={link.href} 
+                    onClick={(e) => handleScroll(e, link.href)}
+                    className="text-slate-300 hover:text-[#fd610d] font-bold transition-all flex items-center gap-2 group"
+                  >
+                    <span className="w-0 group-hover:w-3 h-[2px] bg-[#fd610d] transition-all duration-300" />
                     {link.name}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Contact Details Column */}
+          {/* Contact Information */}
           <div>
-            <h4 className="font-display font-black uppercase text-[11px] tracking-[0.2em] mb-8 text-primary">Reach Us</h4>
-            <div className="flex flex-col gap-6 text-sm">
-              <a href="tel:+918208108473" className="group flex flex-col">
-                <span className="text-slate-500 text-[10px] uppercase font-bold mb-1 flex items-center gap-2">
-                  <Phone size={10} /> Direct Line
-                </span>
-                <span className="flex items-center gap-2 group-hover:text-primary transition-colors font-bold text-base">
-                  +91 8208108473
-                  <ArrowUpRight size={14} className="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
-                </span>
-              </a>
-              <a href="mailto:info@punewarehouse.com" className="group flex flex-col">
-                <span className="text-slate-500 text-[10px] uppercase font-bold mb-1 flex items-center gap-2">
-                  <Mail size={10} /> Business Email
-                </span>
-                <span className="group-hover:text-primary transition-colors font-bold">info@punewarehouse.com</span>
-              </a>
-            </div>
+            <h4 className="text-xs font-black uppercase tracking-[0.3em] mb-8 text-slate-500">Contact Detail</h4>
+            <ul className="space-y-6">
+              <li>
+                <a href="tel:+918208108473" className="group flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center group-hover:bg-blue-600 transition-all duration-500">
+                    <Phone size={18} className="text-blue-500 group-hover:text-white" />
+                  </div>
+                  <div>
+                    <p className="text-[10px] font-black uppercase tracking-widest text-slate-600 mb-0.5">Direct Line</p>
+                    <p className="font-bold text-slate-200 group-hover:text-blue-500 transition-colors">+91 82081 08473</p>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center">
+                    <MapPin size={18} className="text-blue-500" />
+                  </div>
+                  <div>
+                    <p className="text-[10px] font-black uppercase tracking-widest text-slate-600 mb-0.5">Operations</p>
+                    <p className="font-bold text-slate-200">Pune & Indore Industrial Zones</p>
+                  </div>
+                </div>
+              </li>
+            </ul>
           </div>
 
-          {/* Address Column */}
-          <div>
-            <h4 className="font-display font-black uppercase text-[11px] tracking-[0.2em] mb-8 text-primary">Location</h4>
-            <div className="flex flex-col">
-              <span className="text-slate-500 text-[10px] uppercase font-bold mb-1 flex items-center gap-2">
-                <MapPin size={10} /> HQ Address
-              </span>
-              <span className="text-slate-300 leading-relaxed font-medium text-sm">
-                Corporate Hub, Baner Road,<br /> 
-                Pune, Maharashtra<br /> 
-                India - 411045
-              </span>
+          {/* CTA Column */}
+          <div className="bg-gradient-to-br from-white/10 to-transparent p-8 rounded-[2rem] border border-white/10 relative overflow-hidden group">
+            <div className="relative z-10">
+              <h4 className="text-xl font-black uppercase mb-4 leading-tight">Ready for a <br/> Site Visit?</h4>
+              <Link 
+                href="/#contact"
+                className="inline-flex items-center gap-2 text-[#fd610d] font-black uppercase tracking-widest text-[10px] group-hover:gap-4 transition-all"
+              >
+                Book Inspection <ArrowUpRight size={14} />
+              </Link>
+            </div>
+            <div className="absolute -bottom-4 -right-4 text-white/5 transition-transform group-hover:scale-110 group-hover:rotate-12 duration-700">
+               <FaWhatsapp size={100} />
             </div>
           </div>
-
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-white/5 pt-10 flex flex-col md:flex-row justify-between items-center gap-8">
-          <div className="flex flex-col gap-2 text-center md:text-left">
-            <p className="text-[10px] uppercase font-black tracking-[0.25em] text-slate-500">
-              © {currentYear || "2026"} Realty Works Pune. ALL RIGHTS RESERVED.
-            </p>
-            {/* Lupa Entertainment Attribution */}
-            <p className="text-[9px] uppercase font-bold tracking-[0.1em] text-slate-600">
-              Website by{" "}
-              <a 
-                href="https://lupaentertainment.com" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="text-primary hover:text-white transition-colors"
-              >
-                Lupa Entertainment
-              </a>
-            </p>
+        <div className="pt-10 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6 text-[10px] font-bold uppercase tracking-[0.2em] text-slate-600">
+          <div className="flex flex-wrap justify-center md:justify-start items-center gap-x-8 gap-y-2">
+            <p className="opacity-50">© {currentYear} Warehouse Sheds</p>
+            <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
+            <Link href="/terms" className="hover:text-white transition-colors">Terms of Service</Link>
           </div>
           
-          <div className="flex flex-wrap justify-center gap-x-8 gap-y-4">
-            {footerLinks.support.map((link) => (
-              <a 
-                key={link.name} 
-                href={link.href} 
-                className="text-[10px] uppercase font-black tracking-widest text-slate-500 hover:text-primary transition-colors relative group"
-              >
-                {link.name}
-                <span className="absolute -bottom-1 left-0 w-full h-[1px] bg-primary scale-x-0 group-hover:scale-x-100 transition-transform origin-right" />
-              </a>
-            ))}
+          <div className="flex items-center gap-2 group cursor-default">
+            <span className="opacity-50">Website by</span>
+            <span className="text-slate-400 group-hover:text-[#fd610d] transition-colors tracking-normal lowercase italic font-black text-sm">
+              lupa entertainment
+            </span>
           </div>
         </div>
       </div>
     </footer>
   );
-}
+};
+
+export default Footer;

@@ -1,96 +1,97 @@
-// src/data/inventory.ts
+// data/inventory.ts
 
 export interface Property {
-  id: string;
-  title: string;
+  id: number;
   location: string;
-  size: string;
-  price: string;
-  load: string;
-  status: "Available" | "Last Unit" | "Pre-Leased";
-  rating: number;
-  tag: string;
+  title: string;
   image: string;
-  category: "Warehouse" | "Industrial" | "Fulfillment";
+  area: string;
+  type: string;
+  // Technical Specs for Modal
+  height: string;
+  flooring: string;
+  docks: string;
+  status: "Ready" | "Built-to-Suit" | "Upcoming";
+  description: string;
 }
 
-export const properties: Property[] = [
+export const inventoryData: Property[] = [
   {
-    id: "WH-WG01",
-    title: "Express Logistics Park",
+    id: 1,
     location: "Wagholi",
-    size: "45,000",
-    price: "32",
-    load: "8 Ton",
-    status: "Available",
-    rating: 4.8,
-    tag: "Prime Corridor",
-    image: "/assets/wagholi.avif", 
-    category: "Warehouse"
+    title: "Premium Logistics Hub - Wagholi",
+    image: "/assets/wagholi.avif",
+    area: "45,000 sq.ft",
+    type: "Warehouse",
+    height: "32 ft Apex",
+    flooring: "5 Ton FM2 Grade",
+    docks: "4 Loading Bays",
+    status: "Ready",
+    description: "Centrally located in Wagholi with high-speed connectivity to the Pune-Ahmednagar Highway. Ideal for e-commerce and distribution.",
   },
   {
-    id: "WH-LK02",
-    title: "Heavy-Duty Industrial Hub",
+    id: 2,
     location: "Lonikand",
-    size: "95,000",
-    price: "24",
-    load: "12 Ton",
-    status: "Available",
-    rating: 4.7,
-    tag: "High Load Capacity",
+    title: "Strategic Distribution Center",
     image: "/assets/lonikand.avif",
-    category: "Industrial"
+    area: "60,000 sq.ft",
+    type: "Industrial Shed",
+    height: "30 ft Apex",
+    flooring: "VDF Flooring",
+    docks: "6 Loading Bays",
+    status: "Ready",
+    description: "A robust industrial shed with wide approach roads for heavy trailers. Perfect for long-term industrial storage.",
   },
   {
-    id: "WH-LG03",
-    title: "Air-Cargo Terminal",
+    id: 3,
     location: "Lohegaon",
-    size: "15,000",
-    price: "45",
-    load: "5 Ton",
-    status: "Last Unit",
-    rating: 4.9,
-    tag: "Near Airport",
+    title: "Last Mile Delivery Base",
     image: "/assets/lohegaon.avif",
-    category: "Fulfillment"
+    area: "25,000 sq.ft",
+    type: "Warehouse",
+    height: "25 ft Apex",
+    flooring: "Trimix Flooring",
+    docks: "2 Loading Bays",
+    status: "Ready",
+    description: "Located within close proximity to the airport, this facility is optimized for last-mile delivery and quick turnarounds.",
   },
   {
-    id: "WH-KS04",
-    title: "Strategic Distribution Point",
+    id: 4,
     location: "Kesanand Phata",
-    size: "30,000",
-    price: "28",
-    load: "7 Ton",
-    status: "Available",
-    rating: 4.6,
-    tag: "Easy Access",
+    title: "Heavy Duty Industrial Shed",
     image: "/assets/kesanand.avif",
-    category: "Warehouse"
+    area: "80,000 sq.ft",
+    type: "Built-to-Suit",
+    height: "35 ft Apex",
+    flooring: "High Load Bearing",
+    docks: "Customizable",
+    status: "Built-to-Suit",
+    description: "Large scale land parcel available for custom industrial construction to meet your specific manufacturing requirements.",
   },
   {
-    id: "WH-CK05",
-    title: "Mega Manufacturing Plant",
+    id: 5,
     location: "Chakan MIDC",
-    size: "150,000",
-    price: "26",
-    load: "15 Ton",
-    status: "Available",
-    rating: 4.9,
-    tag: "Automotive Belt",
+    title: "Grade-A Manufacturing Space",
     image: "/assets/chakan.avif",
-    category: "Industrial"
+    area: "1,20,000 sq.ft",
+    type: "Industrial Park",
+    height: "40 ft Apex",
+    flooring: "Laser Screed FM2",
+    docks: "12 Loading Bays",
+    status: "Upcoming",
+    description: "A world-class industrial park currently under development in the heart of Chakan's automobile hub.",
   },
   {
-    id: "WH-TG06",
-    title: "Grade-A Storage Solution",
+    id: 6,
     location: "Talegaon",
-    size: "65,000",
-    price: "25",
-    load: "10 Ton",
-    status: "Pre-Leased",
-    rating: 4.8,
-    tag: "Multi-Modal Link",
+    title: "Modern Storage Facility",
     image: "/assets/talegaon.avif",
-    category: "Warehouse"
-  }
+    area: "55,000 sq.ft",
+    type: "Warehouse",
+    height: "30 ft Apex",
+    flooring: "5 Ton Capacity",
+    docks: "5 Loading Bays",
+    status: "Ready",
+    description: "Modern facility with 24/7 security and advanced fire-fighting systems located in the growing Talegaon industrial zone.",
+  },
 ];

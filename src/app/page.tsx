@@ -11,10 +11,10 @@ export default function Home() {
     <>
       <Hero />
       <Inventory />
+      <AboutUs />
       <Industries />
       <Gallery />
       <Specs />
-      <AboutUs />
       <Stats />
       {/* Other sections will go here */}
     </>

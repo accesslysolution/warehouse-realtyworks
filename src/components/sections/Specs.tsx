@@ -3,15 +3,8 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { 
-  ShieldCheck, 
-  Ruler, 
-  Wind, 
-  HardHat, 
-  Truck, 
-  Layers,
-  FlameKindling,
-  ChevronLeft,
-  ChevronRight
+  ShieldCheck, Ruler, Wind, HardHat, Truck, Layers, 
+  FlameKindling, ChevronLeft, ChevronRight, Maximize 
 } from "lucide-react";
 
 // @ts-ignore
@@ -19,58 +12,17 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 // @ts-ignore
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 
-// @ts-ignore
 import 'swiper/css';
-// @ts-ignore
 import 'swiper/css/pagination';
-// @ts-ignore
 import 'swiper/css/navigation';
 
-import { SpecCard } from "@/components/ui/Card";
-
 const technicalSpecs = [
-  {
-    icon: <Ruler />,
-    title: "Clear Height",
-    value: "12 Meters",
-    description: "Maximum vertical storage optimization for high-density racking systems.",
-    detail: "Vertical Efficiency"
-  },
-  {
-    icon: <Layers />,
-    title: "Flooring",
-    value: "FM2 Compliant",
-    description: "Laser-screed SFRC flooring with 5-8 Ton/sqm load-bearing capacity.",
-    detail: "SFRC Technology"
-  },
-  {
-    icon: <FlameKindling />,
-    title: "Fire Safety",
-    value: "ESFR Sprinklers",
-    description: "NFPA-compliant suppression systems with high-velocity roof vents.",
-    detail: "NFPA Standards"
-  },
-  {
-    icon: <Wind />,
-    title: "Ventilation",
-    value: "6 Air Changes",
-    description: "Natural ridge ventilators ensuring optimal ambient temperature control.",
-    detail: "Passive Cooling"
-  },
-  {
-    icon: <Truck />,
-    title: "Docking",
-    value: "Hydraulic Levers",
-    description: "Precision-engineered docking bays with 45-degree apron space.",
-    detail: "Rapid Loading"
-  },
-  {
-    icon: <ShieldCheck />,
-    title: "Security",
-    value: "AI Surveillance",
-    description: "24/7 Peripheral monitoring with integrated motion-sensor technology.",
-    detail: "Smart Perimeter"
-  },
+  { icon: Ruler, title: "Vertical Clearance", value: "12 - 14 Meters", description: "Maximum clear height for high-density FM Global racking systems.", detail: "Clear Height" },
+  { icon: Layers, title: "SFRC Flooring", value: "FM2 Compliant", description: "Laser-screed flooring with 8-ton/sqm point load capacity for heavy machinery.", detail: "Floor Load" },
+  { icon: FlameKindling, title: "Fire Mitigation", value: "ESFR Sprinklers", description: "NFPA-compliant suppression systems with high-velocity smoke vents.", detail: "Fire Safety" },
+  { icon: Wind, title: "Air Changes", value: "6x Per Hour", description: "Passive ridge ventilation ensuring optimal ambient temperature control.", detail: "Ventilation" },
+  { icon: Truck, title: "Docking Apron", value: "16.5m Depth", description: "Precision hydraulic dock levelers with 45-degree concrete apron space.", detail: "Rapid Loading" },
+  { icon: ShieldCheck, title: "Security", value: "AI Monitoring", description: "24/7 integrated surveillance with motion-sensor peripheral alerts.", detail: "Smart Perimeter" },
 ];
 
 export default function Specs() {
@@ -81,90 +33,129 @@ export default function Specs() {
   }, []);
 
   return (
-    <section id="specs" className="py-16 md:py-32 bg-[#F8FAFC] relative overflow-hidden">
-      {/* Background Pattern */}
+    <section id="specs" className="py-16 md:py-32 bg-white relative overflow-hidden">
+      {/* Structural Grid Pattern - Aligned with About Section background style */}
       <div 
         className="absolute inset-0 opacity-[0.03] pointer-events-none" 
         style={{ 
-          backgroundImage: `radial-gradient(#000 1px, transparent 1px)`, 
-          backgroundSize: '30px 30px' 
+          backgroundImage: `linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px)`, 
+          backgroundSize: '50px 50px' 
         }} 
       />
 
-      {/* Container: Changed px-4 to px-6 for better mobile gutters */}
-      <div className="max-w-7xl mx-auto px-6 md:px-10 relative z-10">
+      <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
         
-        {/* Header Section: Adjusted for mobile stacking/alignment */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-10 md:mb-20">
-          <div className="space-y-4 md:space-y-6">
+        {/* Header Section - Matches AboutSection exactly */}
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-10 mb-16 md:mb-24">
+          <div className="max-w-3xl space-y-4">
             <motion.div 
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-slate-200 shadow-sm"
+              className="inline-flex items-center gap-2"
             >
-              <HardHat size={12} className="text-primary" />
-              <span className="text-[9px] md:text-[10px] font-black uppercase tracking-[0.2em] text-slate-600">
-                Grade-A Infrastructure
+              <div className="w-2 h-2 rounded-full bg-[#fd610d]" />
+              <span className="text-[#fd610d] font-black uppercase tracking-[0.2em] text-[10px] md:text-xs">
+                Performance Standards
               </span>
             </motion.div>
             
-            {/* Responsive Heading */}
-            <h2 className="text-4xl md:text-8xl font-display font-black uppercase tracking-tighter text-slate-950 leading-[0.9]">
-              Technical <br className="hidden md:block" /> 
-              <span className="text-slate-300 italic">Core.</span>
+            <h2 className="text-4xl md:text-7xl font-black uppercase tracking-tighter text-slate-900 leading-[0.9]">
+              Technical <br /> 
+              <span className="relative inline-block">
+                <span className="text-blue-600">Specifications</span>
+                <motion.div 
+                  initial={{ width: 0 }}
+                  whileInView={{ width: '100%' }}
+                  transition={{ duration: 1, delay: 0.5 }}
+                  className="absolute -bottom-1 left-0 h-1 bg-blue-600/10" 
+                />
+              </span>
+              <span className="text-blue-600">.</span>
             </h2>
+            
+            <p className="text-slate-600 font-medium text-base md:text-lg leading-relaxed max-w-xl">
+              Engineered for efficiency. Our facilities are built to global Grade-A 
+              standards, ensuring high-load capacity and rapid operations.
+            </p>
           </div>
 
-          {/* Navigation Buttons: Scaled down slightly for mobile */}
-          <div className="flex items-center gap-3 self-end md:self-auto">
-            <button className="swiper-prev-button w-12 h-12 md:w-14 md:h-14 rounded-full border border-slate-200 bg-white flex items-center justify-center text-slate-400 hover:bg-primary hover:text-white hover:border-primary transition-all duration-300 shadow-sm active:scale-90 disabled:opacity-20 disabled:pointer-events-none">
-              <ChevronLeft size={20} />
+          {/* Navigation - Styled to match About Section's industrial buttons */}
+          <div className="flex items-center gap-3">
+            <button className="swiper-prev-button group w-12 h-12 md:w-14 md:h-14 rounded-xl border border-slate-200 bg-white flex items-center justify-center text-slate-400 hover:border-slate-950 hover:text-slate-950 transition-all shadow-sm active:scale-95">
+              <ChevronLeft size={24} />
             </button>
-            <button className="swiper-next-button w-12 h-12 md:w-14 md:h-14 rounded-full border border-slate-200 bg-white flex items-center justify-center text-slate-400 hover:bg-primary hover:text-white hover:border-primary transition-all duration-300 shadow-sm active:scale-90 disabled:opacity-20 disabled:pointer-events-none">
-              <ChevronRight size={20} />
+            <button className="swiper-next-button group w-12 h-12 md:w-14 md:h-14 rounded-xl bg-slate-950 flex items-center justify-center text-white hover:bg-[#fd610d] transition-all shadow-xl active:scale-95">
+              <ChevronRight size={24} />
             </button>
           </div>
         </div>
 
-        {/* Sliding View:
-            - Changed slidesPerView to 1.15 to show a 'hint' of the next card on mobile
-            - overflow-visible is key for the card shadows not to be clipped
-        */}
-        <div className="relative cursor-grab active:cursor-grabbing min-h-[420px]">
+        {/* Carousel Container */}
+        <div className="relative">
           {isMounted ? (
             <Swiper
               modules={[Autoplay, Pagination, Navigation]}
               spaceBetween={20}
-              slidesPerView={1.15}
-              autoplay={{ delay: 4000, disableOnInteraction: false }}
-              pagination={{ clickable: true, dynamicBullets: true }}
-              navigation={{
-                prevEl: '.swiper-prev-button',
-                nextEl: '.swiper-next-button',
-              }}
+              slidesPerView={1}
+              centeredSlides={true}
+              loop={true}
+              autoplay={{ delay: 5000, disableOnInteraction: false }}
+              navigation={{ prevEl: '.swiper-prev-button', nextEl: '.swiper-next-button' }}
               breakpoints={{
-                640: { slidesPerView: 1.5, spaceBetween: 24 },
-                1024: { slidesPerView: 2, spaceBetween: 30 }
+                640: { slidesPerView: 2, spaceBetween: 30, centeredSlides: false },
+                1024: { slidesPerView: 3, spaceBetween: 40, centeredSlides: true }
               }}
-              className="pb-16 !overflow-visible"
+              className="!overflow-visible py-10"
             >
-              {technicalSpecs.map((spec, index) => (
-                <SwiperSlide key={index} className="h-auto">
-                  <SpecCard 
-                    index={index}
-                    icon={spec.icon}
-                    title={spec.title}
-                    value={spec.value}
-                    description={spec.description}
-                    detail={spec.detail}
-                  />
-                </SwiperSlide>
-              ))}
+              {technicalSpecs.map((spec, index) => {
+                const IconComponent = spec.icon;
+                
+                return (
+                  <SwiperSlide key={index} className="h-auto">
+                    {/* @ts-ignore */}
+                    {({ isActive }: { isActive: boolean }) => (
+                      <div className={`
+                        bg-white p-8 md:p-10 rounded-[2rem] h-full flex flex-col justify-between 
+                        transition-all duration-700 border
+                        ${isActive 
+                          ? 'border-slate-200 shadow-[0_40px_80px_-15px_rgba(0,0,0,0.1)] scale-105 z-20' 
+                          : 'border-slate-100 shadow-sm scale-95 opacity-50 md:opacity-100 z-10'
+                        }
+                      `}>
+                        <div className="space-y-6">
+                          <div className={`w-14 h-14 rounded-2xl flex items-center justify-center transition-all duration-500 ${isActive ? 'bg-[#fd610d] text-white shadow-lg shadow-[#fd610d]/30' : 'bg-slate-50 text-blue-600'}`}>
+                            <IconComponent size={28} />
+                          </div>
+                          
+                          <div>
+                            <span className={`text-[10px] font-black uppercase tracking-widest transition-colors ${isActive ? 'text-[#fd610d]' : 'text-slate-400'}`}>
+                              {spec.detail}
+                            </span>
+                            <h3 className="text-2xl md:text-3xl font-black uppercase tracking-tighter text-slate-900 mt-1">
+                              {spec.title}
+                            </h3>
+                            <p className="text-slate-500 font-medium text-sm mt-4 leading-relaxed">
+                              {spec.description}
+                            </p>
+                          </div>
+                        </div>
+
+                        <div className="mt-10 pt-6 border-t border-slate-100 flex items-center justify-between">
+                          <span className="text-2xl md:text-3xl font-black text-slate-950 tracking-tighter">{spec.value}</span>
+                          <div className={`w-8 h-8 rounded-full flex items-center justify-center transition-colors ${isActive ? 'bg-blue-50 text-blue-600' : 'bg-transparent text-slate-200'}`}>
+                            <Maximize size={16} />
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </SwiperSlide>
+                );
+              })}
             </Swiper>
           ) : (
-            <div className="w-full flex gap-4 overflow-hidden">
-                <div className="w-[85%] md:w-1/2 h-80 bg-slate-100 rounded-[2rem] animate-pulse" />
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {[1, 2, 3].map((i) => <div key={i} className="h-96 bg-slate-50 rounded-[2.5rem] animate-pulse" />)}
             </div>
           )}
         </div>
