@@ -57,7 +57,7 @@ const Footer = () => {
               </span>
             </Link>
             <p className="text-slate-400 font-medium leading-relaxed max-w-xs">
-              Specializing in Grade-A industrial infrastructure and warehouse logistics solutions across Pune and Indore since 2018.
+              Specializing in Grade-A industrial infrastructure and warehouse logistics solutions across Pune, Chakan, Talegaon and Ranjangaon since 2018.
             </p>
             <div className="flex items-center gap-3">
               {[
@@ -121,7 +121,7 @@ const Footer = () => {
                     </div>
                     <div>
                       <p className="text-[10px] font-black uppercase tracking-widest text-slate-600 mb-0.5">Operations</p>
-                      <p className="font-bold text-slate-200">Pune & Indore Industrial Zones</p>
+                      <p className="font-bold text-slate-200">Pune, Chakan, Talegaon & Ranjangaon Industrial Zones</p>
                     </div>
                   </div>
                 </li>

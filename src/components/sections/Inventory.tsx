@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
-import { MapPin, Maximize2, ArrowUpRight, FileSpreadsheet, PhoneCall } from 'lucide-react';
+import { MapPin, Maximize2, ArrowUpRight, FileSpreadsheet, PhoneCall, Sparkles } from 'lucide-react';
 import { inventoryData, Property } from '@/data/inventory';
 import PropertyModal from '@/components/sections/PropertyModal';
 import ContactFormPopup from '@/components/sections/ContactForm';
@@ -25,7 +25,7 @@ const InventorySection = () => {
     <section id="inventory" className="py-24 bg-gray-50 text-gray-950 scroll-mt-20 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Header */}
+        {/* Header (Remains same) */}
         <div className="text-center mb-16">
           <motion.span 
             initial={{ opacity: 0, y: 10 }}
@@ -48,7 +48,7 @@ const InventorySection = () => {
           </p>
         </div>
 
-        {/* Property Grid */}
+        {/* Property Grid (Remains same) */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
           {inventoryData.map((item, index) => (
             <motion.div
@@ -99,44 +99,66 @@ const InventorySection = () => {
           ))}
         </div>
 
-        {/* BOTTOM ACTION BUTTONS - Positioned at the end of the inventory list */}
-        <motion.div 
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="flex flex-col md:flex-row items-center justify-center gap-6 pt-10 border-t border-gray-200"
-        >
-          {/* Price Sheet & Floor Plan Button */}
-          <button 
-            onClick={() => setIsPriceSheetOpen(true)}
-            className="w-full md:w-auto flex items-center justify-center gap-3 bg-slate-900 text-white px-10 py-5 rounded-2xl font-black uppercase tracking-widest text-[11px] hover:bg-blue-600 transition-all shadow-xl active:scale-95 group"
+        {/* BOTTOM ACTION SECTION */}
+        <div className="pt-16 border-t border-gray-200 text-center">
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            className="flex flex-col items-center mb-10"
           >
-            <FileSpreadsheet size={20} className="text-[#fd610d] group-hover:text-white" />
-            Get Price Sheet & Floor Plan
-          </button>
+            <motion.div 
+               animate={{ opacity: [1, 0.4, 1] }} 
+               transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
+               className="flex items-center gap-3 bg-blue-50 text-blue-600 px-6 py-2 rounded-full border border-blue-100 mb-4"
+            >
+              <Sparkles size={16} className="fill-blue-600" />
+              <h4 className="text-[10px] md:text-xs font-black uppercase tracking-[0.3em]">Direct Deal Opportunity</h4>
+            </motion.div>
+            
+            <h3 className="text-2xl md:text-4xl font-black uppercase tracking-tighter leading-none text-slate-900">
+              Call & Unlock <span className="text-[#fd610d]">The Best Deal</span> Today
+            </h3>
+          </motion.div>
 
-        {/* Unlock Deal Button (Direct Call) */}
-        <a
-          href="tel:+919765464333"
-          className="w-full md:w-auto flex items-center justify-center gap-3 bg-white text-slate-900 border-2 border-slate-900 px-10 py-5 rounded-2xl font-black uppercase tracking-widest text-[11px] hover:bg-[#fd610d] hover:border-[#fd610d] hover:text-white transition-all shadow-xl active:scale-95 relative group"
-        >
-          <div className="flex items-center gap-2">
-            <PhoneCall size={18} className="animate-pulse group-hover:animate-none" />
-            <span>+91 97654 64333</span>
-          </div>
-          <span className="h-4 w-[1px] bg-slate-200 group-hover:bg-white/30 hidden md:block" />
-          <span>Call & Unlock Best Deal</span>
-          
-          {/* Notification Ping */}
-          <span className="absolute -top-3 -right-3 flex h-6 w-6">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-6 w-6 bg-[#fd610d] text-[10px] items-center justify-center text-white">!</span>
-          </span>
-        </a>
-        </motion.div>
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="flex flex-col lg:flex-row items-center justify-center gap-4 md:gap-6"
+          >
+            {/* Price Sheet & Floor Plan Button */}
+            <button 
+              onClick={() => setIsPriceSheetOpen(true)}
+              className="w-full lg:w-auto h-[70px] flex items-center justify-center gap-4 bg-slate-950 text-white px-12 rounded-2xl font-black uppercase tracking-widest text-[11px] hover:bg-blue-600 transition-all shadow-2xl active:scale-95 group border-b-4 border-slate-800 hover:border-blue-700"
+            >
+              <FileSpreadsheet size={22} className="text-[#fd610d] group-hover:text-white transition-colors" />
+              <span>Get Price Sheet & Floor Plan</span>
+            </button>
+
+            {/* Pulsing Call Button - Constant Slate 950 Text */}
+            <motion.a
+              href="tel:+919765464333"
+              animate={{ 
+                backgroundColor: ["#fff7ed", "#fd610d", "#fff7ed"],
+                borderColor: ["#fd610d", "#fd610d", "#fd610d"]
+              }}
+              transition={{ 
+                repeat: Infinity, 
+                duration: 2, 
+                ease: "easeInOut" 
+              }}
+              className="w-full lg:w-auto h-[70px] flex items-center justify-center gap-6 border-2 px-12 rounded-2xl font-black uppercase tracking-widest text-slate-950 shadow-xl active:scale-95 group relative overflow-hidden"
+            >
+              <div className="flex items-center gap-4 relative z-10">
+                <PhoneCall size={24} className="animate-bounce" />
+                <span className="text-xl md:text-2xl tracking-tighter leading-none">+91 97654 64333</span>
+              </div>
+            </motion.a>
+          </motion.div>
+        </div>
       </div>
 
-      {/* POPUPS */}
+      {/* POPUPS (Remains same) */}
       <PriceSheetPopup isOpen={isPriceSheetOpen} onClose={() => setIsPriceSheetOpen(false)} />
       
       <AnimatePresence mode="wait">

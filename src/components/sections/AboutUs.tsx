@@ -23,17 +23,20 @@ const AboutSection = () => {
     {
       title: "Warehouse Rentals",
       desc: "Ready-to-use spaces so you can start operations quickly.",
-      icon: <Warehouse className="text-blue-600" size={22} />
+      icon: <Warehouse className="text-blue-600" size={22} />,
+      image: "/assets/warehouserentals1.avif"
     },
     {
       title: "Land for Development",
       desc: "Find the right land if you want to build your own facility.",
-      icon: <Map className="text-blue-600" size={22} />
+      icon: <Map className="text-blue-600" size={22} />,
+      image: "/assets/Developement1.avif"
     },
     {
       title: "Built-to-Suit",
       desc: "We help you design and develop a warehouse based on your needs.",
-      icon: <Construction className="text-blue-600" size={22} />
+      icon: <Construction className="text-blue-600" size={22} />,
+      image: "/assets/Built1.avif"
     }
   ];
 
@@ -68,20 +71,20 @@ const AboutSection = () => {
               </p>
             </div>
 
-            {/* --- REALTY WORKS MANAGEMENT BADGE (Borderless, Full Color) --- */}
+            {/* --- REALTY WORKS MANAGEMENT BADGE (Borderless, No Bg, 1:1 Aspect) --- */}
             <motion.div 
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               className="bg-slate-50 p-5 rounded-2xl flex items-center gap-5"
             >
-              {/* Logo Container - Seamless, Full Color initially */}
-              <div className="w-16 h-16 bg-white rounded-xl flex items-center justify-center flex-shrink-0 relative overflow-hidden">
+              {/* Logo Container - aspect-square, transparent bg */}
+              <div className="w-16 h-16 aspect-square flex items-center justify-center flex-shrink-0 relative overflow-hidden">
                 <Image 
                   src="/realty.avif" 
                   alt="Realty Works Management" 
                   fill 
-                  className="object-contain p-2" // Removed 'grayscale hover:grayscale-0'
+                  className="object-contain" 
                 />
               </div>
 
@@ -134,12 +137,26 @@ const AboutSection = () => {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
             {services.map((service, idx) => (
-              <div key={idx} className="bg-slate-50 border border-slate-100 p-6 md:p-8 rounded-2xl md:rounded-3xl hover:border-blue-200 transition-all group">
-                <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center mb-5 shadow-sm">
-                  {service.icon}
+              <div key={idx} className="bg-slate-50 border border-slate-100 p-6 md:p-8 rounded-2xl md:rounded-3xl hover:border-blue-200 transition-all group overflow-hidden flex flex-col">
+                
+                {/* 1:1 Aspect Ratio Image */}
+                <div className="relative aspect-square w-full mb-6 rounded-2xl overflow-hidden shadow-sm">
+                  <Image
+                    src={service.image}
+                    alt={service.title}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
                 </div>
-                <h4 className="text-lg md:text-xl font-black text-slate-900 uppercase tracking-tight mb-2">{service.title}</h4>
-                <p className="text-slate-500 font-medium text-sm md:text-base leading-relaxed">{service.desc}</p>
+
+                <div className="flex items-center gap-3 mb-3">
+                    <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center shadow-sm flex-shrink-0">
+                      {service.icon}
+                    </div>
+                    <h4 className="text-lg md:text-xl font-black text-slate-900 uppercase tracking-tight leading-tight">{service.title}</h4>
+                </div>
+                
+                <p className="text-slate-500 font-medium text-sm md:text-base leading-relaxed flex-grow">{service.desc}</p>
               </div>
             ))}
           </div>
